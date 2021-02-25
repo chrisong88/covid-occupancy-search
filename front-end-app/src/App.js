@@ -18,7 +18,7 @@ class App extends React.Component {
 
   handleSubmit(event) {
     
-    fetch("/get_occupancy/" + this.state.value).then(res => res.json()).then(data =>
+    fetch("http://localhost:5000/get_occupancy/" + this.state.value).then(res => res.json()).then(data =>
         {
             this.setState(
               {
