@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import HospitalForm from './HospitalForm'
 import './App.css';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,19 +17,32 @@ class App extends React.Component {
       this.setState({value: event.target.value});
   }
 
-  handleSubmit(event) {
-    
-    fetch("http://localhost:5000/get_occupancy/", ).then(res => res.json()).then(data =>
-        {
-            this.setState(
-              {
-                message: data + " vacancies"
-              }
-            )
-        }
+  // need to make it async??
+  async handleSubmit(event) {
+    const response =
+      await axios.get("http://0.0.0.0:5000/get_occupancy",
+      {params: {'zipcode': this.state.value}}
       )
-      event.preventDefault();
+    this.setState(
+      {
+        message: response.data
+      }
+    )
   }
+
+  // handleSubmit(event) {
+    
+  //   fetch("http://localhost:5000/get_occupancy/").then(res => res.json()).then(data =>
+  //       {
+  //           this.setState(
+  //             {
+  //               message: data + " vacancies"
+  //             }
+  //           )
+  //       }
+  //     )
+  //     event.preventDefault();
+  // }
 
   render () {
     return (
