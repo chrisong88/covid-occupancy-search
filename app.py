@@ -19,8 +19,6 @@ def get_occupancy():
         cur.execute(f" SELECT hospital, open_adult_icu_beds FROM occupancy WHERE zip='{zipcode}'")
     return(json.dumps(cur.fetchall()))
 
-
-
 # def get_occupancy(zip):
 #     # hospital_name = request.args.get('')
 #     # return(json.dumps(20))

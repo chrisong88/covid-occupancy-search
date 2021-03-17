@@ -18,16 +18,18 @@ class App extends React.Component {
   }
 
   // need to make it async??
-  async handleSubmit(event) {
-    const response =
-      await axios.get("http://0.0.0.0:5000/get_occupancy",
+  handleSubmit(event) {
+    axios.get("http://0.0.0.0:5000/get_occupancy",
       {params: {'zipcode': this.state.value}}
       )
-    this.setState(
-      {
-        message: response.data
+    .then((response) => {
+        this.setState({message: response.data});  
+        console.log(response);  
+      }, (error) => {
+        console.log(error);
       }
     )
+    event.preventDefault();
   }
 
   // handleSubmit(event) {
